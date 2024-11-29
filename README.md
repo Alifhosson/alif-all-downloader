@@ -20,12 +20,7 @@
 ```bash
 > npm i alifx-media-downloader
 ```
-## Last Update 
-```print
-• pintarest (fix)
-• capcut (fix)
-```
-
+--
 ## Example (install)
 ```js
 const alif = require("alifx-media-downloader");
