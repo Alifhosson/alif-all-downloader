@@ -20,7 +20,7 @@
 ```bash
 > npm i alifx-media-downloader
 ```
---
+
 ## Example (install)
 ```js
 const alif = require("alifx-media-downloader");
