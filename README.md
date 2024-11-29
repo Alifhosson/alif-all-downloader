@@ -11,9 +11,10 @@
 [![npm downloads](https://img.shields.io/npm/dm/alifx-media-downloader.svg?style=flat-square)](https://www.npmjs.com/package/alifx-media-downloader)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/alifx-media-downloader/badge)](https://www.jsdelivr.com/package/npm/alifx-media-downloader)
 
-[![GitHub contributors](https://img.shields.io/github/contributors/Alifhosson/alifx-media-downloader)](https://github.com/Alifhosson/alifx-media-downloader/graphs/contributors) [![GitHub issues](https://img.shields.io/github/issues/Alifhosson/alifx-media-downloader)](https://github.com/Alifhosson/alifx-media-downloader/issues) [![HitCount](https://views.whatilearened.today/views/github/Alifhosson/alifx-media-downloader.svg)](https://github.com/Alifhosson/alifx-media-downloader)
+[![GitHub contributors](https://img.shields.io/github/contributors/Alifhosson/alifx-media-downloader)](https://github.com/Alifhosson/alifx-media-downloader/graphs/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/Alifhosson/alifx-media-downloader)](https://github.com/Alifhosson/alifx-media-downloader/issues)
+[![HitCount](https://views.whatilearened.today/views/github/Alifhosson/alifx-media-downloader.svg)](https://github.com/Alifhosson/alifx-media-downloader)
 [![Socket Badge](https://socket.dev/api/badge/npm/package/alifx-media-downloader)](https://socket.dev/npm/package/alifx-media-downloader)
-
 
 ## Instalation :
 ```bash
