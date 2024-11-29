@@ -1,5 +1,5 @@
 {
-  "name": "alif-all-downloader",
+  "name": "ck-dl",
   "version": "1.0.0",
   "description": "A flexible media downloader using Nayan and Rahad downloaders with fallback support.",
   "main": "app.js",
