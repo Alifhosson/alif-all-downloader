@@ -1,11 +1,11 @@
 {
-  "name": "ck-dl",
-  "version": "1.0.3",
+  "name": "alif-all-downloader",
+  "version": "0.0.1",
   "description": "Unified downloader using nayan-video-downloader and rahad-all-downloader.",
   "main": "index.js",
   "dependencies": {
     "axios": "^1.0.0",
-    "nayan-video-downloader": "^1.0.0",
-    "rahad-all-downloader": "^1.0.0"
+    "nayan-video-downloader": "^0.0.2",
+    "rahad-all-downloader": "^2.1.17"
   }
 }
