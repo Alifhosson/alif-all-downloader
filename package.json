@@ -1,24 +1,11 @@
 {
   "name": "ck-dl",
-  "version": "1.0.2",
-  "description": "A flexible media downloader using Nayan and Rahad downloaders with fallback support.",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "keywords": [
-    "media",
-    "downloader",
-    "video",
-    "nayan",
-    "rahad",
-    "alif"
-  ],
-  "author": "ALIF HOSSON",
-  "license": "MIT",
+  "version": "1.0.3",
+  "description": "Unified downloader using nayan-video-downloader and rahad-all-downloader.",
+  "main": "index.js",
   "dependencies": {
-    "axios": "^1.5.0",
-    "nayan-media-downloader": "^1.0.0",
-    "rahad-media-downloader": "^2.1.14"
+    "axios": "^1.0.0",
+    "nayan-video-downloader": "^1.0.0",
+    "rahad-all-downloader": "^1.0.0"
   }
 }
