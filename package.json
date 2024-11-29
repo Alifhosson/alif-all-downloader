@@ -1,6 +1,6 @@
 {
   "name": "alif-media-download",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "A multi-platform media downloader supporting Instagram, TikTok, Facebook, YouTube, and more.",
   "main": "alif/index.js",
   "scripts": {
