@@ -1,6 +1,6 @@
 {
   "name": "ck-dl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A flexible media downloader using Nayan and Rahad downloaders with fallback support.",
   "main": "app.js",
   "scripts": {
