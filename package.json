@@ -1,8 +1,40 @@
 {
   "name": "alif-all-downloader",
-  "version": "0.0.1",
-  "description": "Unified downloader using nayan-video-downloader and rahad-all-downloader.",
-  "main": "index.js",
+  "version": "1.1.1",
+  "description": "A multi-platform media downloader supporting Instagram, TikTok, Facebook, YouTube, and more.",
+  "main": "alif/index.js",
+  "scripts": {
+    "test": "node alif/index.js",
+    "start": "node alif/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alifhosson/alif-all-downloader.git"
+  },
+  "keywords": [
+    "instagram",
+    "downloader",
+    "media",
+    "link",
+    "tiktok",
+    "video",
+    "facebook",
+    "youtube",
+    "twitter",
+    "gdrive",
+    "pinterest",
+    "media-download",
+    "alldl",
+    "likee",
+    "threads",
+    "alif"
+  ],
+  "author": "ALIF",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alifhosson/alif-all-downloader/issues"
+  },
+  "homepage": "https://github.com/Alifhosson/alif-all-downloader#readme",
   "dependencies": {
     "axios": "^1.0.0",
     "nayan-video-downloader": "^0.0.2",
