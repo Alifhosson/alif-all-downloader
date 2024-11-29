@@ -1,6 +1,6 @@
 const axios = require("axios");
-const { alldown } = require("nayan-media-downloader");
-const { alldl } = require("rahad-media-downloader");
+const { alldown: nayanDownload } = require("nayan-video-downloader");
+const { alldl: rahadDownload } = require("rahad-all-downloader");
 
 // Replace this with your actual config URL
 const CONFIG_URL = "https://raw.githubusercontent.com/Alifhosson/webtxt/refs/heads/main/config.json";
@@ -15,8 +15,7 @@ const loadConfig = async () => {
   }
 };
 
-// alif-all-download module
-module.exports.alifAllDownload = (url) =>
+module.exports.alldown = (url) =>
   new Promise(async (resolve, reject) => {
     try {
       const config = await loadConfig();
@@ -29,50 +28,37 @@ module.exports.alifAllDownload = (url) =>
         });
       }
 
-      // Validate the URL
-      const isValidUrl = (string) => {
-        try {
-          new URL(string);
-          return true;
-        } catch {
-          return false;
-        }
-      };
-
-      if (!isValidUrl(url)) {
-        return reject({
-          status: false,
-          message: "The provided URL is not valid. Please check and try again.",
-        });
-      }
-
-      // Try downloading with nayan-media-downloader
+      // Attempt to process the URL using nayan-video-downloader first
       try {
-        const { data, msg } = await alldown(url);
+        const { data, msg } = await nayanDownload(url);
         return resolve({
           status: true,
-          source: "nayan-media-downloader",
           dev: "ALIF HOSSON",
           devfb: "https://facebook.com/100075421394195",
           devwp: "wa.me/+8801615623399",
-          message: "Download successful using nayan-media-downloader.",
+          message: "Downloaded successfully using nayan-video-downloader.",
           data: data || msg,
         });
       } catch (nayanError) {
-        // Fallback to rahad-media-downloader if the first one fails
+        console.error("nayan-video-downloader failed, trying rahad-all-downloader...", nayanError.message);
+
+        // Fallback to rahad-all-downloader
         try {
-          const result = await alldl(url);
+          const result = await rahadDownload(url);
           return resolve({
             status: true,
-            source: "rahad-media-downloader",
             dev: "ALIF HOSSON",
             devfb: "https://facebook.com/100075421394195",
             devwp: "wa.me/+8801615623399",
-            message: "Download successful using rahad-media-downloader.",
+            message: "Downloaded successfully using rahad-all-downloader.",
             data: result,
           });
         } catch (rahadError) {
-          throw new Error("Both download services failed. Please try again later.");
+          console.error("rahad-all-downloader failed...", rahadError.message);
+          return reject({
+            status: false,
+            message: "Both nayan-video-downloader and rahad-all-downloader failed. Please try again later.",
+          });
         }
       }
     } catch (error) {
