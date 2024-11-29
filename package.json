@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alifhosson/alif-all-downloader.git"
+    "url": "https://github.com/Alifhosson/alifx-media-downloader.git"
   },
   "keywords": [
     "instagram",
@@ -32,9 +32,9 @@
   "author": "ALIF",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Alifhosson/alif-all-downloader/issues"
+    "url": "https://github.com/Alifhosson/alifx-media-downloader/issues"
   },
-  "homepage": "https://github.com/Alifhosson/alif-all-downloader#readme",
+  "homepage": "https://github.com/alifx-media-downloader#readme",
   "dependencies": {
     "axios": "^1.0.0",
     "nayan-video-downloader": "^0.0.2",
