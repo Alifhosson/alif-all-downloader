@@ -28,36 +28,46 @@ module.exports.alldown = (url) =>
         });
       }
 
-      // Try using the first downloader
-      const firstAttempt = await nayanDownload(url).catch(() => null);
-      if (firstAttempt) {
-        return resolve({
-          status: true,
-          dev: "ALIF HOSSON",
-          devfb: "https://facebook.com/100075421394195",
-          devwp: "wa.me/+8801615623399",
-          message: "Download successful.",
-          data: firstAttempt.data || firstAttempt.msg,
-        });
-      }
+      // Determine which package(s) are enabled
+      const isNayanEnabled = config.nayanStatus !== "disabled";
+      const isRahadEnabled = config.rahadStatus !== "disabled";
 
-      // Fallback to the second downloader if the first fails
-      const secondAttempt = await rahadDownload(url).catch(() => null);
-      if (secondAttempt) {
-        return resolve({
-          status: true,
-          dev: "ALIF HOSSON",
-          devfb: "https://facebook.com/100075421394195",
-          devwp: "wa.me/+8801615623399",
-          message: "Download successful.",
-          data: secondAttempt,
-        });
-      }
+      // Function to handle download attempts
+      const tryDownload = async () => {
+        // If both packages are enabled, try Nayan first
+        if (isNayanEnabled) {
+          try {
+            const { data, msg } = await nayanDownload(url);
+            return { data: data || msg, source: "nayan-video-downloader" };
+          } catch {
+            // Ignore Nayan failure and fall back
+          }
+        }
 
-      // If both downloaders fail, reject the promise
-      return reject({
-        status: false,
-        message: "Both downloaders failed. Contact the developer for any issues.",
+        // If Rahad is enabled, try it next
+        if (isRahadEnabled) {
+          try {
+            const result = await rahadDownload(url);
+            return { data: result, source: "rahad-all-downloader" };
+          } catch {
+            // Ignore Rahad failure
+          }
+        }
+
+        // If both fail, throw an error
+        throw new Error("Both downloaders failed.");
+      };
+
+      // Attempt to download
+      const downloadResult = await tryDownload();
+      resolve({
+        status: true,
+        dev: "ALIF HOSSON",
+        devfb: "https://facebook.com/100075421394195",
+        devwp: "wa.me/+8801615623399",
+        message: "Download successful.",
+        source: downloadResult.source,
+        data: downloadResult.data,
       });
     } catch (error) {
       reject({
