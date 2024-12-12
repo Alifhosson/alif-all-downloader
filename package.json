@@ -1,6 +1,6 @@
 {
   "name": "alifx-media-downloader",
-  "version": "2.2.1",
+  "version": "1.4.9",
   "description": "A multi-platform media downloader supporting Instagram, TikTok, Facebook, YouTube, and more.",
   "main": "alif/index.js",
   "scripts": {
@@ -37,6 +37,7 @@
   "homepage": "https://github.com/Alifhosson/alifx-media-downloader#readme",
   "dependencies": {
     "axios": "^1.0.0",
+    "nayan-video-downloader": "^0.0.8",
     "rahad-all-downloader": "^2.1.17"
   }
 }
