@@ -11,7 +11,8 @@ const loadConfig = async () => {
     const { data } = await axios.get(CONFIG_URL);
     return data;
   } catch (error) {
-    throw new Error("Failed to load configuration from GitHub.");
+    console.error("Failed to load configuration from GitHub. Using default configuration.");
+    return { serviceStatus: "on", mainPackage: "nayan", fallbackPackage: "rahad" }; // Default config
   }
 };
 
@@ -20,7 +21,7 @@ module.exports.alldown = (url) =>
     try {
       const config = await loadConfig();
 
-      // Check if the service is turned off
+      // If the overall service is off
       if (config.serviceStatus === "off") {
         return reject({
           status: false,
@@ -28,47 +29,53 @@ module.exports.alldown = (url) =>
         });
       }
 
-      // Determine which package(s) are enabled
-      const isNayanEnabled = config.nayanStatus !== "disabled";
-      const isRahadEnabled = config.rahadStatus !== "disabled";
+      // Determine the main and fallback packages
+      const mainPackage = config.mainPackage;
+      const fallbackPackage = config.fallbackPackage;
 
-      // Function to handle download attempts
-      const tryDownload = async () => {
-        // If both packages are enabled, try Nayan first
-        if (isNayanEnabled) {
-          try {
-            const { data, msg } = await nayanDownload(url);
-            return { data: data || msg, source: "nayan-video-downloader" };
-          } catch {
-            // Ignore Nayan failure and fall back
-          }
+      // Helper to download using a specific package
+      const downloadWithPackage = async (packageName) => {
+        if (packageName === "nayan") {
+          return await nayanDownload(url);
+        } else if (packageName === "rahad") {
+          return await rahadDownload(url);
         }
-
-        // If Rahad is enabled, try it next
-        if (isRahadEnabled) {
-          try {
-            const result = await rahadDownload(url);
-            return { data: result, source: "rahad-all-downloader" };
-          } catch {
-            // Ignore Rahad failure
-          }
-        }
-
-        // If both fail, throw an error
-        throw new Error("Both downloaders failed.");
+        throw new Error("Invalid package name.");
       };
 
-      // Attempt to download
-      const downloadResult = await tryDownload();
-      resolve({
-        status: true,
-        dev: "ALIF HOSSON",
-        devfb: "https://facebook.com/100075421394195",
-        devwp: "wa.me/+8801615623399",
-        message: "Download successful.",
-        source: downloadResult.source,
-        data: downloadResult.data,
-      });
+      // Try main package first
+      let result;
+      try {
+        result = await downloadWithPackage(mainPackage);
+        return resolve({
+          status: true,
+          source: mainPackage === "nayan" ? "nayan-video-downloader" : "rahad-all-downloader",
+          dev: "ALIF HOSSON",
+          devfb: "https://facebook.com/100075421394195",
+          devwp: "wa.me/+8801615623399",
+          message: "Download successful.",
+          data: result.data || result.msg || result,
+        });
+      } catch (mainError) {
+        console.error(`Main package (${mainPackage}) failed. Trying fallback...`);
+      }
+
+      // Try fallback package
+      try {
+        result = await downloadWithPackage(fallbackPackage);
+        return resolve({
+          status: true,
+          source: fallbackPackage === "nayan" ? "nayan-video-downloader" : "rahad-all-downloader",
+          dev: "ALIF HOSSON",
+          devfb: "https://facebook.com/100075421394195",
+          devwp: "wa.me/+8801615623399",
+          message: "Download successful.",
+          data: result.data || result.msg || result,
+        });
+      } catch (fallbackError) {
+        console.error(`Fallback package (${fallbackPackage}) also failed.`);
+        throw new Error("Both main and fallback packages failed.");
+      }
     } catch (error) {
       reject({
         status: false,
