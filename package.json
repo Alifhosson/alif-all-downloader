@@ -1,6 +1,6 @@
 {
   "name": "alifx-media-downloader",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A multi-platform media downloader supporting Instagram, TikTok, Facebook, YouTube, and more.",
   "main": "alif/index.js",
   "scripts": {
